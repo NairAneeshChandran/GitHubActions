@@ -1,0 +1,56 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Env variables
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  APP_ENV: production
+  DB_HOST: localhost
+  DB_USER: root
+  DB_PASSWORD: password123
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  mainjob:
+    # The type of runner that the job will run on
+    name: Main Job
+    runs-on: ubuntu-latest
+
+    env:
+      APP_ENVQA: QA
+      DB_HOST: localhostQA
+      DB_USER: rootQA
+      DB_PASSWORD: password123QA
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Runs a single command using the runners shell
+      - name: Run Vraibles
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo "$APP_ENVQA - QA",
+          echo "${{ env.APP_ENV}}".
+
+  build-api:
+    runs-on: ubuntu-latest
+    steps:
+     - run : echo "Building the API..."
+
+  build-db:
+    needs: build-app
+    runs-on: ubuntu-latest
+    steps:
+     - run : echo "Hello DB"
+
+  package:
+    needs: [build-app, build-db]
+    runs-on: ubuntu-latest
+    steps:
+     - run : echo "Packaging the application..."
