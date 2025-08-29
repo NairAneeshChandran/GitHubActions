@@ -37,20 +37,3 @@ jobs:
         run: |
           echo "$APP_ENVQA - QA",
           echo "${{ env.APP_ENV}}".
-
-  build-api:
-    runs-on: ubuntu-latest
-    steps:
-     - run : echo "Building the API..."
-
-  build-db:
-    needs: build-app
-    runs-on: ubuntu-latest
-    steps:
-     - run : echo "Hello DB"
-
-  package:
-    needs: [build-app, build-db]
-    runs-on: ubuntu-latest
-    steps:
-     - run : echo "Packaging the application..."
