@@ -43,4 +43,5 @@ jobs:
     environment: DEV
     steps:
       - name: Print secret value
-        run: echo "MY_TOP_SECRET: ${{ secrets.APP_SECRET }}"
+        run: |
+          echo "MY_TOP_SECRET: ${{ secrets.APP_SECRET }}"
