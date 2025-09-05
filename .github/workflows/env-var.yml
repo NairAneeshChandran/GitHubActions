@@ -38,3 +38,9 @@ jobs:
         run: |
           echo "$APP_ENVQA - QA"
           echo "${{ env.APP_ENV}}".
+  deployment:
+    runs-on: ubuntu-latest
+    environment: DEV
+    steps:
+      - name: Print secret value
+        run: echo "MY_TOP_SECRET: ${{ secrets.APP_SECRET }}"
